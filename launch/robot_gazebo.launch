@@ -1,0 +1,17 @@
+<launch>
+  <!-- Cargar URDF con xacro -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find lab7)/urdf/robot_version1_proyect_grip.urdf'" />
+
+  <!-- Lanzar Gazebo con mundo vacío -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <!-- Spawner para insertar el robot en Gazebo -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+        args="-param robot_description -urdf -model robot_version1_proyect_grip -z 0.1"
+        output="screen" />
+</launch>
+
